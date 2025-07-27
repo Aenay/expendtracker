@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Spend Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-database-compat.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyB4fUqs--67-dAeHP--AIGD_ftx-42DYvU",
+        authDomain: "expendtracker-11127.firebaseapp.com",
+        projectId: "expendtracker-11127",
+        storageBucket: "expendtracker-11127.firebasestorage.app",
+        messagingSenderId: "612377746480",
+        appId: "1:612377746480:web:fccb23fd5deac9a817e1f5",
+        measurementId: "G-29PXF2F0YB",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+  </head>
+  <body class="bg-gray-100 min-h-screen p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
+        Daily Spend Tracker
+      </h1>
+
+      <!-- Balance Section -->
+      <div class="mb-8 p-4 bg-blue-50 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-600"
+              >Set/Update Initial Balance</label
+            >
+            <div class="flex gap-2 mt-1">
+              <input
+                type="number"
+                id="balanceInput"
+                class="border rounded p-2 w-40"
+                placeholder="Enter amount"
+              />
+              <button
+                onclick="handleSetBalance()"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              >
+                Set Balance
+              </button>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm text-gray-600">Remaining Balance</div>
+            <div id="remainingBalance" class="text-2xl font-bold text-blue-600">
+              $0.00
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Expense Section -->
+      <div class="mb-8 p-4 bg-gray-50 rounded-lg">
+        <h2 class="text-lg font-semibold mb-4">Add New Expense</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input
+            type="text"
+            id="expenseDescription"
+            class="border rounded p-2"
+            placeholder="Expense description"
+          />
+          <div class="flex gap-2">
+            <input
+              type="number"
+              id="expenseAmount"
+              class="border rounded p-2 flex-grow"
+              placeholder="Amount"
+            />
+          </div>
+          <input
+            type="date"
+            id="expenseDate"
+            class="border rounded p-2"
+            placeholder="Date"
+          />
+          <input
+            type="time"
+            id="expenseTime"
+            class="border rounded p-2"
+            placeholder="Time"
+          />
+          <button
+            onclick="handleAddExpense()"
+            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 col-span-2"
+          >
+            Add Expense
+          </button>
+        </div>
+      </div>
+
+      <!-- Transaction History -->
+      <div class="p-4 bg-gray-50 rounded-lg">
+        <h2 class="text-lg font-semibold mb-4">Transaction History</h2>
+        <div id="transactionList" class="space-y-2"></div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
